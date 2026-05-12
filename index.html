@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Phonological Inventory Database of Central Eurasia</title>
+
   <style>
+
     body {
       margin: 0;
       font-family: Roboto, sans-serif;
       line-height: 1.6;
       color: #222;
       background: #f9f9f9;
+      scroll-behavior: smooth;
     }
 
     header {
@@ -38,26 +42,62 @@
       color: #ccc;
     }
 
+    /* NAVIGATION */
+
     nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
       background: #fff;
-      padding: 15px;
+      padding: 15px 20px;
       position: sticky;
       top: 0;
       border-bottom: 1px solid #eee;
+      z-index: 1000;
     }
 
-    nav a {
-      text-decoration: none;
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropbtn {
+      background: #111;
+      color: white;
+      padding: 12px 18px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 250px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .dropdown-content a {
       color: #333;
-      font-weight: bold;
+      padding: 14px 18px;
+      text-decoration: none;
+      display: block;
+      transition: background 0.2s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f2f2f2;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
     }
 
     section {
       max-width: 900px;
-      margin: 40px auto;
+      margin: 60px auto;
       padding: 0 20px;
     }
 
@@ -78,14 +118,6 @@
       margin-top: 0;
     }
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      background: #111;
-      color: white;
-      margin-top: 40px;
-    }
-
     .btn {
       display: inline-block;
       margin-top: 10px;
@@ -95,89 +127,185 @@
       text-decoration: none;
       border-radius: 5px;
     }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #111;
+      color: white;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 80px 20px;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .dropdown-content {
+        min-width: 200px;
+      }
+
+    }
+
   </style>
 </head>
+
 <body>
 
   <header>
     <h1>Phonological Inventory Database of Central Eurasia</h1>
-    <p>Unversity of Washington | Seattle, WA</p>
+    <p>University of Washington | Seattle, WA</p>
   </header>
 
+  <!-- DROPDOWN NAVIGATION -->
+
   <nav>
-    <a href="#About">About</a>
-    <a href="#Map">Map</a>
-    <a href="#Language Directory">Language Directory</a>
-    <a href="#Phoneme Search">Phoneme Search</a>
-    <a href="#Acknowledgements">Acknowledgements</a>
-    <a href="#Contributions">Contributions</a>
+
+    <div class="dropdown">
+
+      <button class="dropbtn">Menu ▾</button>
+
+      <div class="dropdown-content">
+        <a href="#about">About</a>
+        <a href="#map">Map</a>
+        <a href="#language-directory">Language Directory</a>
+        <a href="#phoneme-search">Phoneme Search</a>
+        <a href="#acknowledgements">Acknowledgements</a>
+        <a href="#contributions">Contributions</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+    </div>
+
   </nav>
 
-  <section id="About">
+  <!-- ABOUT -->
+
+  <section id="about">
+
     <h2>About the Project</h2>
+
     <p>
-      This is a linguistic database that documents and organizes the phonological, grammatical, 
-      and lexical features of languages across Eurasia. It is designed to support comparative and historical
-      research by allowing users to explore similarities and differences among languages spoken from Western
-      Europe through Central Asia to East Asia. The database provides structured, searchable information that
-      helps researchers analyze patterns of linguistic diversity, language contact, and regional typology
-      across the Eurasian continent. <p>
-      <h3>Goals <h3>
-        <p>
-        <ul>
+      This is a linguistic database that documents and organizes the phonological,
+      grammatical, and lexical features of languages across Eurasia.
+    </p>
+
+    <p>
+      It is designed to support comparative and historical research by allowing users
+      to explore similarities and differences among languages spoken from Western
+      Europe through Central Asia to East Asia.
+    </p>
+
+    <p>
+      The database provides structured, searchable information that helps researchers
+      analyze patterns of linguistic diversity, language contact, and regional typology
+      across the Eurasian continent.
+    </p>
+
+    <h3>Goals</h3>
+
+    <ul>
       <li>Compatible with Kazakh/Turkish</li>
       <li>Language Directory</li>
       <li>Phoneme Search</li>
       <li>Acknowledgements & Contributions</li>
     </ul>
-    <p>
+
   </section>
 
-  <section id="Map">
+  <!-- MAP -->
+
+  <section id="map">
+
     <h2>Map</h2>
 
     <div class="project">
+
       <h3>Map [under construction...]</h3>
-      <p>Input map with pin points complete with linked phonological inventories.</p>
+
+      <p>
+        Interactive map with pin points linked to phonological inventories.
+      </p>
+
       <a class="btn" href="#">View Project</a>
+
     </div>
+
   </section>
 
-  <section id="Language Directory">
+  <!-- LANGUAGE DIRECTORY -->
+
+  <section id="language-directory">
+
     <h2>Language Directory</h2>
+
     <p>
-      text goes here
+      Text goes here.
     </p>
+
   </section>
 
-  <section id="Phoneme Search">
+  <!-- PHONEME SEARCH -->
+
+  <section id="phoneme-search">
+
     <h2>Phoneme Search</h2>
+
     <p>
-      text goes here
+      Text goes here.
     </p>
+
   </section>
 
-  <section id="Acknowledgements">
+  <!-- ACKNOWLEDGEMENTS -->
+
+  <section id="acknowledgements">
+
     <h2>Acknowledgements</h2>
+
     <p>
-      text goes here
+      Text goes here.
     </p>
+
   </section>
-  
-  <section id="Contributions">
+
+  <!-- CONTRIBUTIONS -->
+
+  <section id="contributions">
+
     <h2>Contributions</h2>
+
     <p>
-      text goes here
+      Text goes here.
     </p>
+
   </section>
+
+  <!-- CONTACT -->
 
   <section id="contact">
+
     <h2>Contact</h2>
-    <p>Email: </p>
+
+    <p>Email:</p>
+
   </section>
 
+  <!-- FOOTER -->
+
   <footer>
-    <p>University of Washington Dept. of Middle Eastern Languages & Cultures. Talant Mawkanuli & Anna Luisa Batista. Built with HTML & CSS.</p>
+
+    <p>
+      University of Washington Dept. of Middle Eastern Languages & Cultures.
+      Talant Mawkanuli & Anna Luisa Batista.
+      Built with HTML & CSS.
+    </p>
+
   </footer>
 
 </body>
