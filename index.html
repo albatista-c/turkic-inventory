@@ -66,6 +66,11 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .dropbtn:hover {
+      background: #333;
     }
 
     .dropdown-content {
@@ -79,6 +84,10 @@
       margin-top: 10px;
     }
 
+    .dropdown-content.show {
+      display: block;
+    }
+
     .dropdown-content a {
       color: #333;
       padding: 14px 18px;
@@ -89,10 +98,6 @@
 
     .dropdown-content a:hover {
       background-color: #f2f2f2;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
     }
 
     section {
@@ -126,6 +131,11 @@
       color: white;
       text-decoration: none;
       border-radius: 5px;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #333;
     }
 
     footer {
@@ -157,9 +167,14 @@
 
 <body>
 
+  <!-- HEADER -->
+
   <header>
+
     <h1>Phonological Inventory Database of Central Eurasia</h1>
+
     <p>University of Washington | Seattle, WA</p>
+
   </header>
 
   <!-- DROPDOWN NAVIGATION -->
@@ -168,16 +183,26 @@
 
     <div class="dropdown">
 
-      <button class="dropbtn">Menu ▾</button>
+      <button class="dropbtn" onclick="toggleMenu()">
+        Menu ▾
+      </button>
 
-      <div class="dropdown-content">
+      <div id="dropdownMenu" class="dropdown-content">
+
         <a href="#about">About</a>
+
         <a href="#map">Map</a>
+
         <a href="#language-directory">Language Directory</a>
+
         <a href="#phoneme-search">Phoneme Search</a>
+
         <a href="#acknowledgements">Acknowledgements</a>
+
         <a href="#contributions">Contributions</a>
+
         <a href="#contact">Contact</a>
+
       </div>
 
     </div>
@@ -301,12 +326,50 @@
   <footer>
 
     <p>
-      University of Washington Dept. of Middle Eastern Languages & Cultures.
+      © 2026 Phonological Inventory Database of Central Eurasia.
+      University of Washington Department of Middle Eastern Languages & Cultures.
       Talant Mawkanuli & Anna Luisa Batista.
-      Built with HTML & CSS.
     </p>
 
   </footer>
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    function toggleMenu() {
+
+      document
+        .getElementById("dropdownMenu")
+        .classList
+        .toggle("show");
+
+    }
+
+    /* Close menu if clicking outside */
+
+    window.onclick = function(event) {
+
+      if (!event.target.matches('.dropbtn')) {
+
+        const dropdowns =
+          document.getElementsByClassName("dropdown-content");
+
+        for (let i = 0; i < dropdowns.length; i++) {
+
+          const openDropdown = dropdowns[i];
+
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+
+        }
+
+      }
+
+    }
+
+  </script>
 
 </body>
 </html>
