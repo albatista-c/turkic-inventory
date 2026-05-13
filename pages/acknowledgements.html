@@ -2,11 +2,212 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Acknowledgements</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Phonological Inventory Database of Central Eurasia</title>
+
+  <style>
+
+    body {
+      margin: 0;
+      font-family: Roboto, sans-serif;
+      line-height: 1.6;
+      color: #222;
+      background: #f9f9f9;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('photo.jpg');
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      color: white;
+      padding: 120px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    /* NAVIGATION */
+
+    nav {
+      background: #fff;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid #eee;
+      z-index: 1000;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropbtn {
+      background: #111;
+      color: white;
+      padding: 12px 18px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .dropbtn:hover {
+      background: #333;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 250px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .dropdown-content.show {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 14px 18px;
+      text-decoration: none;
+      display: block;
+      transition: background 0.2s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f2f2f2;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    .project {
+      background: white;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .project h3 {
+      margin-top: 0;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #111;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #333;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #111;
+      color: white;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 80px 20px;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .dropdown-content {
+        min-width: 200px;
+      }
+
+    }
+
+  </style>
 </head>
+
 <body>
 
-  <h1>[Title here]</h1>
+  <!-- HEADER -->
+
+  <header>
+
+    <h1>Phonological Inventory Database of Central Eurasia</h1>
+
+    <p>University of Washington | Seattle, WA</p>
+
+  </header>
+
+  <!-- DROPDOWN NAVIGATION -->
+
+  <nav>
+
+    <div class="dropdown">
+
+      <button class="dropbtn" onclick="toggleMenu()">
+        Menu ▾
+      </button>
+
+      <div id="dropdownMenu" class="dropdown-content">
+
+        <a href="pages/about.html">About</a>
+
+        <a href="#map">Map</a>
+
+        <a href="pages/language-directory.html">Language Directory</a>
+
+        <a href="pages/phoneme-search.html">Phoneme Search</a>
+
+        <a href="pages/acknowledgements.html">Acknowledgements</a>
+
+        <a href="pages/contributions.html">Contributions</a>
+
+        <a href="pages/contact.html">Contact</a>
+
+      </div>
+
+    </div>
+
+  </nav>
 
   <section id="acknowledgements">
 
