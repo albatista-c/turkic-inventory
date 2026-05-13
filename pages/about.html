@@ -233,7 +233,56 @@
 
   </section>
 
-  <a href="../index.html">Back Home</a>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <p>
+      © 2026 Phonological Inventory Database of Central Eurasia.
+      University of Washington Department of Middle Eastern Languages & Cultures.
+      Talant Mawkanuli & Anna Luisa Batista.
+    </p>
+
+  </footer>
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    function toggleMenu() {
+
+      document
+        .getElementById("dropdownMenu")
+        .classList
+        .toggle("show");
+
+    }
+
+    /* Close menu if clicking outside */
+
+    window.onclick = function(event) {
+
+      if (!event.target.matches('.dropbtn')) {
+
+        const dropdowns =
+          document.getElementsByClassName("dropdown-content");
+
+        for (let i = 0; i < dropdowns.length; i++) {
+
+          const openDropdown = dropdowns[i];
+
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+
+        }
+
+      }
+
+    }
+
+  </script>
 
 </body>
 </html>
