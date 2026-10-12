@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phonological Inventory Database of Central Eurasia</title>
+<meta name="description" content="An interactive map of Central Eurasia linking to the phonological inventories of its languages. University of Washington.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14203a;
+    --lapis: #1f3f7a;
+    --lapis-deep: #0f1d3d;
+    --saffron: #e3a72f;
+    --turquoise: #2b8a8a;
+    --paper: #f6f7fb;
+    --surface: #ffffff;
+    --text: #1b2336;
+    --muted: #5a6479;
+    --line: #dde1ec;
+    --serif: "Newsreader", "Gentium Plus", Georgia, "Times New Roman", serif;
+    --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --max: 1160px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0c1428;
+      --surface: #131d36;
+      --text: #e8ecf6;
+      --muted: #9aa6c0;
+      --line: #25324f;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--saffron); outline-offset: 3px; border-radius: 4px; }
+  .wrap { width: min(var(--max), 100% - 3rem); margin-inline: auto; }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--lapis-deep) 94%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    color: #fff;
+  }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.25rem; }
+  .brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+  .brand-mark {
+    width: 2.4rem; height: 2.4rem; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--saffron); color: var(--lapis-deep);
+    font-family: var(--serif); font-size: 1.45rem; font-weight: 600; line-height: 1;
+  }
+  .brand-text { font-family: var(--serif); font-size: 1.12rem; font-weight: 500; line-height: 1.2; max-width: 20ch; }
+  nav ul { display: flex; gap: .15rem; list-style: none; margin: 0; padding: 0; }
+  nav a {
+    display: block; padding: .5rem .8rem; border-radius: 999px;
+    text-decoration: none; font-size: .95rem; font-weight: 500; color: rgba(255,255,255,.82);
+    transition: background .15s, color .15s;
+  }
+  nav a:hover { background: rgba(255,255,255,.12); color: #fff; }
+  .menu-btn {
+    display: none; background: none; border: 1px solid rgba(255,255,255,.3); color: #fff;
+    padding: .45rem .9rem; border-radius: 999px; font: inherit; font-size: .95rem; cursor: pointer;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { background: var(--lapis-deep); color: #fff; position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; opacity: .5;
+    background:
+      radial-gradient(60rem 30rem at 85% 10%, rgba(43,138,138,.35), transparent 60%),
+      radial-gradient(40rem 25rem at 0% 100%, rgba(31,63,122,.8), transparent 60%);
+  }
+  .hero-grid {
+    position: relative; display: grid; grid-template-columns: 1.15fr .85fr; gap: 4rem;
+    align-items: center; padding-block: clamp(3.5rem, 8vw, 6.5rem);
+  }
+  .affil { margin: 0 0 1.25rem; color: var(--saffron); font-weight: 500; font-size: .98rem; }
+  h1 {
+    font-family: var(--serif); font-weight: 500; font-size: clamp(2.5rem, 5.6vw, 4.3rem);
+    line-height: 1.04; letter-spacing: -.02em; margin: 0 0 1.5rem; text-wrap: balance;
+  }
+  .lede { font-size: 1.2rem; color: rgba(255,255,255,.8); max-width: 52ch; margin: 0 0 2.25rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+  .btn {
+    display: inline-block; padding: .85rem 1.5rem; border-radius: 999px;
+    font-weight: 600; font-size: 1rem; text-decoration: none;
+    transition: transform .15s, background .15s;
+  }
+  .btn-primary { background: var(--saffron); color: var(--lapis-deep); }
+  .btn-primary:hover { background: #f0b94a; transform: translateY(-1px); }
+  .btn-ghost { border: 1px solid rgba(255,255,255,.35); color: #fff; }
+  .btn-ghost:hover { background: rgba(255,255,255,.1); }
+
+  /* Vowel chart */
+  .chart-card {
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14);
+    border-radius: 22px; padding: 1.5rem 1.5rem 1.1rem;
+  }
+  .chart-card svg { width: 100%; height: auto; display: block; }
+  .chart-card .poly { fill: none; stroke: rgba(255,255,255,.35); stroke-width: 1.5; }
+  .chart-card .guide { stroke: rgba(255,255,255,.15); stroke-width: 1; stroke-dasharray: 4 5; }
+  .chart-card .dot-u { fill: var(--saffron); }
+  .chart-card .dot-r { fill: var(--turquoise); }
+  .chart-card text { font-family: var(--serif); font-size: 26px; fill: #fff; }
+  .chart-card .axis { font-family: var(--sans); font-size: 11px; fill: rgba(255,255,255,.55); }
+  .vowel { cursor: default; }
+  .vowel circle { transition: r .15s; }
+  .vowel:hover circle { r: 8; }
+  .legend { display: flex; gap: 1.25rem; margin: .6rem 0 .25rem; font-size: .85rem; color: rgba(255,255,255,.7); }
+  .legend span::before {
+    content: ""; display: inline-block; width: .6rem; height: .6rem; border-radius: 50%;
+    margin-right: .45rem; background: var(--saffron);
+  }
+  .legend span:last-child::before { background: var(--turquoise); }
+  .chart-note { font-size: .85rem; color: rgba(255,255,255,.55); margin: .25rem 0 0; }
+
+  /* ---------- Sections ---------- */
+  section { padding-block: clamp(3.5rem, 7vw, 5.5rem); }
+  h2 {
+    font-family: var(--serif); font-weight: 500; font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    line-height: 1.12; letter-spacing: -.015em; margin: 0 0 1rem;
+  }
+  .section-head { max-width: 62ch; margin-bottom: 2.25rem; }
+  .section-head p { color: var(--muted); margin: 0; }
+
+  /* Map */
+  .map-frame {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
+    padding: .6rem; box-shadow: 0 18px 50px -28px rgba(15,29,61,.35);
+  }
+  .map-frame iframe {
+    display: block; width: 100%; height: clamp(380px, 62vh, 640px);
+    border: 0; border-radius: 16px; background: var(--line);
+  }
+  .map-caption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1.5rem; padding: .9rem .9rem .5rem; color: var(--muted); font-size: .95rem; }
+  .badge {
+    display: inline-block; padding: .15rem .65rem; border-radius: 999px;
+    background: color-mix(in srgb, var(--saffron) 25%, transparent);
+    color: var(--text); font-size: .85rem; font-weight: 600;
+  }
+
+  /* Goals */
+  .goals { background: var(--surface); border-block: 1px solid var(--line); }
+  .goals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+  .prose p { margin: 0 0 1.1rem; max-width: 62ch; color: var(--text); }
+  .prose p:last-child { margin-bottom: 0; }
+  .roadmap { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .roadmap li {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: .95rem 0; border-bottom: 1px solid var(--line); font-weight: 500;
+  }
+  .roadmap small { font-weight: 500; font-size: .82rem; color: var(--muted); white-space: nowrap; }
+  .roadmap .now small { color: var(--turquoise); }
+  .roadmap h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 500; margin: 0 0 1rem; }
+  .langs { margin-top: 1.5rem; padding: 1.1rem 1.25rem; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); font-size: .98rem; color: var(--muted); }
+  .langs strong { color: var(--text); }
+
+  /* Explore */
+  .explore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .tile {
+    display: flex; flex-direction: column; gap: .5rem; padding: 1.6rem;
+    border-radius: 18px; background: var(--surface); border: 1px solid var(--line);
+    text-decoration: none; transition: border-color .15s, transform .15s;
+  }
+  .tile:hover { border-color: var(--lapis); transform: translateY(-2px); }
+  .tile .glyph { font-family: var(--serif); font-size: 2.4rem; line-height: 1; color: var(--turquoise); }
+  .tile h3 { margin: .35rem 0 0; font-family: var(--serif); font-size: 1.4rem; font-weight: 500; }
+  .tile p { margin: 0; color: var(--muted); font-size: .98rem; }
+
+  /* Footer */
+  footer { background: var(--lapis-deep); color: rgba(255,255,255,.75); padding-block: 3rem; font-size: .95rem; }
+  .foot-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; }
+  footer strong { display: block; color: #fff; font-family: var(--serif); font-size: 1.2rem; font-weight: 500; margin-bottom: .4rem; }
+  footer p { margin: 0 0 .3rem; max-width: 56ch; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, auto); gap: .4rem 2rem; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--saffron); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px) {
+    .hero-grid, .goals-grid { grid-template-columns: 1fr; }
+    .hero-grid { gap: 3rem; }
+    .chart-card { max-width: 480px; }
+    .explore-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 860px) {
+    .menu-btn { display: block; }
+    nav { position: absolute; left: 0; right: 0; top: 100%; background: var(--lapis-deep); display: none; border-bottom: 1px solid rgba(255,255,255,.1); }
+    nav.open { display: block; }
+    nav ul { flex-direction: column; padding: .75rem 1.5rem 1.25rem; }
+    nav a { border-radius: 10px; padding: .75rem .9rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Phonological Inventory Database of Central Eurasia, home">
+      <span class="brand-mark" aria-hidden="true">ɯ</span>
+      <span class="brand-text">Phonological Inventory Database</span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="siteNav">Menu</button>
+    <nav id="siteNav" aria-label="Main">
+      <ul>
+        <li><a href="https://albatista-c.github.io/turkic-inventory/pages/about.html">About</a></li>
+        <li><a href="#map">Map</a></li>
+        <li><a href="https://albatista-c.github.io/turkic-inventory/pages/language-directory.html">Language Directory</a></li>
+        <li><a href="https://albatista-c.github.io/turkic-inventory/pages/phoneme-search.html">Phoneme Search</a></li>
+        <li><a href="https://albatista-c.github.io/turkic-inventory/pages/acknowledgements.html">Acknowledgements</a></li>
+        <li><a href="https://albatista-c.github.io/turkic-inventory/pages/contributions.html">Contributions</a></li>
+        <li><a href="https://albatista-c.github.io/turkic-inventory/pages/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="affil">University of Washington, Seattle, WA</p>
+        <h1>Phonological Inventory Database of Central Eurasia</h1>
+        <p class="lede">Explore the sound systems of the languages of Central Eurasia on an interactive map, with each region linking to the phonological inventories of the languages spoken there.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#map">Open the map</a>
+          <a class="btn btn-ghost" href="https://albatista-c.github.io/turkic-inventory/pages/language-directory.html">Browse languages</a>
+        </div>
+      </div>
+
+      <figure class="chart-card" style="margin:0">
+        <svg viewBox="0 0 400 270" role="img" aria-label="Vowel chart showing front and back, close and open vowels, with unrounded and rounded vowels marked in different colors">
+          <polygon class="poly" points="30,25 370,25 290,235 150,235"/>
+          <line class="guide" x1="62" y1="95" x2="342" y2="95"/>
+          <line class="guide" x1="96" y1="165" x2="316" y2="165"/>
+          <line class="guide" x1="200" y1="25" x2="220" y2="235"/>
+          <text class="axis" x="30" y="255">front</text>
+          <text class="axis" x="340" y="255">back</text>
+          <g class="vowel"><circle class="dot-u" cx="58" cy="45" r="6"/><text x="68" y="38">i</text><title>i, close front unrounded</title></g>
+          <g class="vowel"><circle class="dot-r" cx="118" cy="45" r="6"/><text x="128" y="38">y</text><title>y, close front rounded</title></g>
+          <g class="vowel"><circle class="dot-u" cx="278" cy="45" r="6"/><text x="288" y="38">ɯ</text><title>ɯ, close back unrounded</title></g>
+          <g class="vowel"><circle class="dot-r" cx="338" cy="45" r="6"/><text x="326" y="76">u</text><title>u, close back rounded</title></g>
+          <g class="vowel"><circle class="dot-u" cx="92" cy="115" r="6"/><text x="102" y="108">e</text><title>e, close-mid front unrounded</title></g>
+          <g class="vowel"><circle class="dot-r" cx="150" cy="115" r="6"/><text x="160" y="108">ø</text><title>ø, close-mid front rounded</title></g>
+          <g class="vowel"><circle class="dot-r" cx="304" cy="115" r="6"/><text x="314" y="108">o</text><title>o, close-mid back rounded</title></g>
+          <g class="vowel"><circle class="dot-u" cx="140" cy="195" r="6"/><text x="150" y="188">æ</text><title>æ, near-open front unrounded</title></g>
+          <g class="vowel"><circle class="dot-u" cx="262" cy="215" r="6"/><text x="272" y="208">ɑ</text><title>ɑ, open back unrounded</title></g>
+        </svg>
+        <div class="legend"><span>Unrounded</span><span>Rounded</span></div>
+        <p class="chart-note">Vowel space shared by many Turkic languages.</p>
+      </figure>
+    </div>
+  </div>
+
+  <section id="map">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Map of Central Eurasia</h2>
+        <p>Select a region to see where each language is spoken. Pins will link directly to phonological inventories as the map is completed.</p>
+      </div>
+      <div class="map-frame">
+        <iframe
+          src="https://www.google.com/maps/d/u/0/embed?mid=1nyte0Pvz8ytMUKlTh99NZdVaIRxJCSo&amp;ehbc=2E312F&amp;noprof=1"
+          title="Interactive map of Central Eurasia" loading="lazy" allowfullscreen></iframe>
+        <div class="map-caption">
+          <span>Interactive map with pins linked to phonological inventories.</span>
+          <span class="badge">Under construction</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="goals" id="goals">
+    <div class="wrap goals-grid">
+      <div>
+        <h2>Goals for the project</h2>
+        <div class="prose">
+          <p>This is a work in progress to build a website around an interactive map of Central Eurasia. The map will mark specific regions and link to the phonological inventories of the languages spoken there.</p>
+          <p>The site currently has a homepage that will host the map, and a dropdown menu linking to additional resources and pages.</p>
+          <p>Next, Google Maps will be embedded using the JavaScript API, enabling custom markers and richer interaction. Once the map is complete, the layout of the other pages will be refined and expanded, and linguistic content and resources added.</p>
+        </div>
+        <div class="langs"><strong>Planned translations:</strong> Kazakh, Turkish, or both, so the database is accessible to a wider audience.</div>
+      </div>
+      <div>
+        <h3 style="font-family:var(--serif);font-size:1.5rem;font-weight:500;margin:0 0 1rem">Roadmap</h3>
+        <ul class="roadmap">
+          <li class="now">Use the Google Maps JavaScript API <small>Next</small></li>
+          <li>Add custom markers <small>Planned</small></li>
+          <li>Improve user interaction <small>Planned</small></li>
+          <li>Refine page layout <small>Planned</small></li>
+          <li>Add linguistic content <small>Planned</small></li>
+          <li>Add auxiliary pages <small>Planned</small></li>
+          <li>Enable translations (Kazakh and Turkish) <small>Planned</small></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="explore">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Explore the database</h2>
+        <p>Start from the map, or go straight to a language or a sound.</p>
+      </div>
+      <div class="explore-grid">
+        <a class="tile" href="https://albatista-c.github.io/turkic-inventory/pages/language-directory.html">
+          <span class="glyph" aria-hidden="true">q</span>
+          <h3>Language Directory</h3>
+          <p>Find a language and open its phonological inventory.</p>
+        </a>
+        <a class="tile" href="https://albatista-c.github.io/turkic-inventory/pages/phoneme-search.html">
+          <span class="glyph" aria-hidden="true">ŋ</span>
+          <h3>Phoneme Search</h3>
+          <p>Search for a sound and see which languages use it.</p>
+        </a>
+        <a class="tile" href="https://albatista-c.github.io/turkic-inventory/pages/about.html">
+          <span class="glyph" aria-hidden="true">ø</span>
+          <h3>About the project</h3>
+          <p>Learn how the database is built and who contributes to it.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <strong>Phonological Inventory Database of Central Eurasia</strong>
+      <p>University of Washington, Department of Middle Eastern Languages &amp; Cultures.</p>
+      <p>Talant Mawkanuli &amp; Anna Luisa Batista.</p>
+      <p>&copy; 2026 Phonological Inventory Database of Central Eurasia.</p>
+    </div>
+    <ul>
+      <li><a href="https://albatista-c.github.io/turkic-inventory/pages/about.html">About</a></li>
+      <li><a href="#map">Map</a></li>
+      <li><a href="https://albatista-c.github.io/turkic-inventory/pages/language-directory.html">Language Directory</a></li>
+      <li><a href="https://albatista-c.github.io/turkic-inventory/pages/phoneme-search.html">Phoneme Search</a></li>
+      <li><a href="https://albatista-c.github.io/turkic-inventory/pages/acknowledgements.html">Acknowledgements</a></li>
+      <li><a href="https://albatista-c.github.io/turkic-inventory/pages/contributions.html">Contributions</a></li>
+      <li><a href="https://albatista-c.github.io/turkic-inventory/pages/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const nav = document.getElementById('siteNav');
+  btn.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }));
+</script>
+</body>
+</html>
